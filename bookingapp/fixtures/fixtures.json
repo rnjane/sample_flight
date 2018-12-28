@@ -1,0 +1,112 @@
+[
+    {
+        "model": "bookingapp.flight",
+        "pk": 1,
+        "fields": {
+            "name": "KQ2134",
+            "destination": "Seattle",
+            "capacity": 240,
+            "departure_from": "Kampala",
+            "date_time_of_flight": "2019-01-10T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 2,
+        "fields": {
+            "name": "KQ2136",
+            "destination": "Brussels",
+            "capacity": 300,
+            "departure_from": "Dodoma",
+            "date_time_of_flight": "2019-01-11T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 3,
+        "fields": {
+            "name": "KQ2135",
+            "destination": "Istanbul",
+            "capacity": 150,
+            "departure_from": "Nairobi",
+            "date_time_of_flight": "2019-01-05T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 4,
+        "fields": {
+            "name": "KQ0034",
+            "destination": "London",
+            "capacity": 400,
+            "departure_from": "Khartoum",
+            "date_time_of_flight": "2019-01-02T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 5,
+        "fields": {
+            "name": "KQ9134",
+            "destination": "Abu Dhabi",
+            "capacity": 350,
+            "departure_from": "Addis Ababa",
+            "date_time_of_flight": "2019-01-11T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 6,
+        "fields": {
+            "name": "KQ2234",
+            "destination": "New York",
+            "capacity": 500,
+            "departure_from": "Kigali",
+            "date_time_of_flight": "2019-01-31T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 7,
+        "fields": {
+            "name": "KQ2104",
+            "destination": "Osaka",
+            "capacity": 550,
+            "departure_from": "Nairobi",
+            "date_time_of_flight": "2019-01-15T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 8,
+        "fields": {
+            "name": "KQ7134",
+            "destination": "Beijing",
+            "capacity": 430,
+            "departure_from": "Kisumu",
+            "date_time_of_flight": "2019-01-15T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 9,
+        "fields": {
+            "name": "KQ2154",
+            "destination": "Paris",
+            "capacity": 300,
+            "departure_from": "Mombasa",
+            "date_time_of_flight": "2018-12-31T14:20:37Z"
+        }
+    },
+    {
+        "model": "bookingapp.flight",
+        "pk": 10,
+        "fields": {
+            "name": "KQ2145",
+            "destination": "San Francisco",
+            "capacity": 250,
+            "departure_from": "Nairobi",
+            "date_time_of_flight": "2018-12-29T14:20:37Z"
+        }
+    }
+]
