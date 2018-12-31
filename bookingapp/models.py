@@ -17,7 +17,7 @@ class Flight(models.Model):
 
 class FlightBooking(models.Model):
     flight = models.OneToOneField(Flight, related_name='user_booking', on_delete=models.CASCADE, primary_key=True)
-    owner = models.ForeignKey(User, related_name='bucketlists', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='bookings', on_delete=models.CASCADE)
     reserved = models.BooleanField(default=False)
 
 

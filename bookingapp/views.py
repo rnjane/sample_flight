@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from .serializers import UserSerializer, FlightsSerializer
 from . import serializers, models
 from django.shortcuts import get_object_or_404, redirect
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
 
@@ -79,3 +81,45 @@ class DeletePassport(generics.DestroyAPIView):
 class UpdatePassport(generics.UpdateAPIView):
     serializer_class = serializers.PassportSerializer
     queryset = models.PassportPhoto.objects.all()
+
+
+from django.shortcuts import render, reverse
+from paypal.standard.forms import PayPalPaymentsForm
+from django.views.decorators.csrf import csrf_exempt
+
+@permission_classes((IsAuthenticated, ))
+def pay(request, pk):
+    flight = models.Flight.objects.get(pk=pk)
+    paypal_dict = {
+        "business": "njanelabs-facilitator@outlook.com",
+        "amount": flight.cost,
+        "item_name": flight.name,
+        "invoice": flight.name + request.user.username + flight.name,
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('done', kwargs={"flight_name": flight.name})),
+        "cancel_return": request.build_absolute_uri(reverse('canceled')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form}
+    return render(request, "payment.html", context)
+
+@csrf_exempt
+@permission_classes((IsAuthenticated, ))
+def payment_done(request, flight_name):
+    flight = models.Flight.objects.get(pk=flight_name)
+    obj, created = models.FlightBooking.objects.get_or_create(
+        owner=request.user,
+        flight=flight,
+        reserved=True
+    )
+    if obj:
+        obj.reserved = True
+        obj.save()
+    return render(request, 'done.html')
+
+
+@csrf_exempt
+@permission_classes((IsAuthenticated, ))
+def payment_canceled(request):
+    return render(request, 'cancelled.html')
