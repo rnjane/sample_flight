@@ -7,7 +7,7 @@
             "destination": "Seattle",
             "capacity": 240,
             "departure_from": "Kampala",
-            "date_time_of_flight": "2019-01-10T14:20:37Z",
+            "date_time_of_flight": "2019-01-02T14:20:37Z",
             "cost": 120
         }
     },
@@ -127,7 +127,7 @@
             "destination": "Seattle",
             "capacity": 240,
             "departure_from": "Kampala",
-            "date_time_of_flight": "2019-01-10T14:20:37Z",
+            "date_time_of_flight": "2019-01-02T14:20:37Z",
             "cost": 120
         }
     },
@@ -247,7 +247,7 @@
             "destination": "Seattle",
             "capacity": 240,
             "departure_from": "Kampala",
-            "date_time_of_flight": "2019-01-10T14:20:37Z",
+            "date_time_of_flight": "2019-01-02T14:20:37Z",
             "cost": 120
         }
     },
@@ -367,7 +367,7 @@
             "destination": "Seattle",
             "capacity": 240,
             "departure_from": "Kampala",
-            "date_time_of_flight": "2019-01-10T14:20:37Z",
+            "date_time_of_flight": "2019-01-02T14:20:37Z",
             "cost": 120
         }
     },

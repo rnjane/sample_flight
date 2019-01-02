@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'faraday2'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'robertndungu16@gmail.com'
+
 
 # Application definition
 
@@ -140,3 +146,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #django paypal settings
 PAYPAL_RECEIVER_EMAIL = 'njanelabs-facilitator@outlook.com'
 PAYPAL_TEST = True
+
+# celery configs
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Africa/Nairobi'
+
