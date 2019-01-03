@@ -22,7 +22,7 @@ class LoginUser(views.APIView):
         username = request.data.get("username")
         password = request.data.get("password")
         if username is None or password is None:
-            return response.Response({'error': 'Please provide both username and password'},
+            return response.Response({'error': 'Please provvide both username and password'},
                         status=status.HTTP_400_BAD_REQUEST)
         user = authenticate(username=username, password=password)
         if not user:
