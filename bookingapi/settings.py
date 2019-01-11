@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import djcelery
+djcelery.setup_loader()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'bookingapp',
     'django_seed',
     'paypal.standard.ipn',
+    'djcelery',
 ]
 
 REST_FRAMEWORK = {
@@ -148,8 +151,8 @@ PAYPAL_RECEIVER_EMAIL = 'njanelabs-facilitator@outlook.com'
 PAYPAL_TEST = True
 
 # celery configs
-BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
