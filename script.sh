@@ -5,53 +5,71 @@ set -o pipefail
 # set -o nounset
 # set -o xtrace
 
-installation_1 () {
-    sudo apt-get update
-    sudo apt-get install -y - python3-dev
-    sudo apt-get install -y software-properties-common
-    sudo add-apt-repository ppa:chris-lea/redis-server
-    sudo apt-get install redis-server -y
-    sudo apt-get install python-virtualenv
-    sudo apt-get install -y python3-pip
-    sudo apt-get install git
-    sudo apt-get clean
-}
+echo "---------------------------------------------"
+echo "starting installs"
+apt-get update
+apt-get install -y python3-dev
+apt-get install -y python3-setuptools
+apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev \
+libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:chris-lea/redis-server
+apt-get install -y redis-server
+apt-get install -y python-virtualenv
+apt-get install -y python3-pip
+apt-get install -y git
+apt-get clean
 
-# On the root of your virtual machine, create a folder healthcheckapp
-pd# The folder is only created if it does not exist
+echo "----------------------------------------------"
+echo "installs completed"
+
+
+echo "----------------------------------------------"
+echo "create code directory"
 if [[ ! -d "code" ]];then
     mkdir -p ~/code
 fi
-# Change directory from the root and into the healthcheck app
 cd ~/code
 
-if [[ ! -d "venv" ]];then
-    virtualenv --python=python3 venv
-fi
+# echo "----------------------------------------------"
+# echo "create and activate venv"
+# if [[ ! -d "venv" ]];then
+#     virtualenv -p python3 venv
+# fi
 
-VENV_ROOT=venv/bin/activate
-# Activate the virtual environment
-source "${VENV_ROOT}"
+# VENV_ROOT=venv/bin/activate
+# source "${VENV_ROOT}"
 
-if [[ ! -d "sampleflight" ]];then 
-# Clone the repo into the virtual machine 
-    git clone https://github.com/rnjane/sampleflight.git
+echo "----------------------------------------------"
+echo "clone the repo" 
+if [[ ! -d "sample_flight" ]];then 
+    git clone https://github.com/rnjane/sample_flight.git
 fi
 
 # Install requirements for the machine
-pip install -r sampleflight/requirements.txt
+pip3 install -r sample_flight/requirements.txt
 
-cd ~/code/sampleflight
+cd ~/code/sample_flight
 
 # Copy files
-cp celeryd ~/etc/default/celeryd
-cp init.d/celeryd ~/etc/init.d/celeryd
-cp init.d/celerybeat ~/etc/init.d/celerybeat
+cp celeryd /etc/default/celeryd
+cp init.d/celeryd /etc/init.d/celeryd
+cp init.d/celerybeat /etc/init.d/celerybeat
+chmod 755 /etc/init.d/celeryd
+chmod 755 /etc/init.d/celeryd
 
-# cp hc/local_settings.py.example hc/local_settings.py
+echo "----------------------------------------------"
+echo "run celery beat"
+celery -A bookingapi beat -l info --detach
 
-# Run the migrate command
-python ./manage.py migrate
+echo "----------------------------------------------"
+echo "run celeryd"
+celery -A bookingapi worker -l info --detach
 
-# run the django server
-python ./manage.py runserver 0.0.0.0:8000
+echo "----------------------------------------------"
+echo "run migrations"
+python3 manage.py migrate --noinput
+
+echo "----------------------------------------------"
+echo "run the django server"
+python3 manage.py runserver 0.0.0.0:8000
