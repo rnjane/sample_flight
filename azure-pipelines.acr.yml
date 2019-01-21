@@ -1,11 +1,9 @@
 pool:
-  vmImage: 'ubuntu-16.04'
+  vmImage: 'ubuntu-14.04'
 
 steps:
-  - script: docker build -t $(dockerId)/$(imageName) .
-
   - script: |
-      docker login -u $(dockerHubId) -p $(dockerHubPassword)
       docker build -t $(dockerId).azurecr.io/$(imageName) .
+      docker login -u $(dockerId) -p $(pswd) $(dockerId).azurecr.io
       docker push $(dockerId).azurecr.io/$(imageName)
     displayName: 'Build and push Docker image'
