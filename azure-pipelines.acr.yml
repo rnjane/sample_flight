@@ -6,8 +6,6 @@ steps:
 
   - script: |
       docker build -t $(dockerId).azurecr.io/$(imageName) .
-      docker login -u $(dockerHubId) -p $(pswd) $(dockerId).azurecr.io
+      docker login -u $(dockerHubId) -p $(dockerHubPassword) $(dockerId).azurecr.io
       docker push $(dockerId).azurecr.io/$(imageName)
-    env:
-      pswd: $(dockerHubPassword)
     displayName: 'Build and push Docker image'
