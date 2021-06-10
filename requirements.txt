@@ -4,7 +4,7 @@ billiard==3.3.0.23
 celery==3.1.18
 certifi==2018.11.29
 chardet==3.0.4
-Django==2.0.9
+Django==2.2.24
 django-celery==3.2.2
 django-paypal==0.5.0
 django-seed==0.1.9
